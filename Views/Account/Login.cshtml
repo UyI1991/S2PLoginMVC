@@ -10,14 +10,14 @@
 <div class="glass-page-bg min-vh-100 w-100">
     <div class="col-12 col-md-10 col-lg-8 col-xl-7 px-3">
         <div class="card glass-card border-0 p-4 p-sm-5 mx-auto" style="max-width: 450px; width: 100%;">
-            <!-- Encabezado de la caja -->
+            @*Encabezado de la caja*@
             <div class="login-card-header">
                 <i class="bi bi-shield-lock-fill fs-1 mb-2 d-block"></i>
                 <h3 class="mb-1 fw-bold">Bienvenido</h3>
                 <small class="mb-1 fw-bold-50">Ingresa tus credenciales para iniciar sesión</small>
             </div>
 
-            <!-- Cuerpo del formulario -->
+            @*Cuerpo del formulario*@
             <div class="card-body p-4">
                 @if (User.Identity != null && User.Identity.IsAuthenticated)
                 {
@@ -31,6 +31,7 @@
                         <div class="alert alert-success">@TempData["MensajeExito"]</div>
                 }
 
+                @*Formulario de ingreso de usuario y contraseña*@
 				<form asp-controller="Account"
 						asp-action="Login"
 						method="post">
@@ -62,6 +63,7 @@
 					</button>
 				</form>
 			</div>
+            @*Enlace para nuevos usuarios*@
 			<div class="card-footer text-center d-flex flex-column align-items-center py-3">
 				<a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary btn-sm">
 				Registrar nuevo usuario</a>

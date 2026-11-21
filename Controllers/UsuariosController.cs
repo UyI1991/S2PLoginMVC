@@ -10,9 +10,12 @@ using LoginMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using BCrypt.Net;
 
+
 namespace LoginMVC.Controllers
 {
     [AllowAnonymous]
+
+    // Controlador encarado de todo el ciclo de vida de la identidad
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +29,7 @@ namespace LoginMVC.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            // Si el usuario ya tiene una sesión activa se redirige al Panel Principal
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
@@ -73,16 +77,16 @@ namespace LoginMVC.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, "Admin"));
             }
 
+            //Crea la identidad y objeto asociado a las Cookies
             var identidad = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
             var principal = new ClaimsPrincipal(identidad);
 
             // Crear sesión autenticada
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            // Redirigir al Dashboard
+            // Redirigir al Panel Principal
             return RedirectToAction("Index", "Home");
         }
 
@@ -104,6 +108,7 @@ namespace LoginMVC.Controllers
             return View();
         }
 
+        // Guarda el usuario y contraseña cifrada en SQL
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -129,9 +134,11 @@ namespace LoginMVC.Controllers
                 Contrasena = BCrypt.Net.BCrypt.HashPassword(modelo.Contrasena)
             };
 
+            // Guarda y confirma los cambios
             _context.Usuarios.Add(nuevoUsuario);
             await _context.SaveChangesAsync();
 
+            // Se envía una notificación 
             TempData["MensajeExito"] = "Usuario registrado correctamente. Ya puedes iniciar sesión.";
             return RedirectToAction("Login", "Account");
         }
@@ -144,6 +151,7 @@ namespace LoginMVC.Controllers
             return View();
         }
 
+        // Valida la clave actual y el hash en SQL
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -161,6 +169,7 @@ namespace LoginMVC.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            // Busca el usuario en la SQL
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == idUsuario);
             if (usuario == null)
             {
@@ -192,6 +201,7 @@ namespace LoginMVC.Controllers
             return View(usuarios);
         }
 
+        // Elimina un usuario de SQL
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]

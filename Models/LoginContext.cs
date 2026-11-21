@@ -6,17 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LoginMVC.Models
 {
-    //[Table("Usuarios")]
+    // Captura y valida los datos de Inicio de sesión
     public class LoginViewModel
     {
-    //[Key]
-    //public int IdUsuario { get; set; }
 
-    //public string Nombre { get; set; } = string.Empty;
+    // Solicitud de usuario
     [Required(ErrorMessage = "El usuario es obligatorio.")]
     public string Nickname { get; set; } = string.Empty;
 
-    // Contiene el hash BCrypt, nunca la contraseña original.
+    // Solicitud de contraseña
     [Required(ErrorMessage = "La contraseña es obligatoria.")]
     public string Contrasena { get; set; } = string.Empty;
     }
@@ -24,14 +22,17 @@ namespace LoginMVC.Models
 
 namespace LoginMVC.Models
 {
+    // Conexión en Entity Framework y SQL
     public class ApplicationDbContext : DbContext
     {
+        // Constructor que recibe las opciones de configuración
         public ApplicationDbContext(
             DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
             
         }
+        // Representación de la tabla Usuarios en SQL
         public DbSet<Usuario> Usuarios { get; set; }
     }
 }

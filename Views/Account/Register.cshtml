@@ -18,12 +18,14 @@
                             <form asp-controller="Account" asp-action="Register" method="post">
                                 @Html.AntiForgeryToken()
 
+                                @*Campo de ingreso de usuario nuevo*@
                                 <div class="mb-3">
                                     <label asp-for="Nickname" class="form-label">Usuario (Nickname)</label>
-                                    <input asp-for="Nickname" class="form-control" placeholder="Ej. Password" />
+                                    <input asp-for="Nickname" class="form-control" placeholder="Máximo 20 caracteres " />
                                     <span asp-validation-for="Nickname" class="text-danger"></span>
                                 </div>
 
+                                @*Campo de ingreso de contraseña nueva*@
                                 <div class="mb-3">
                                     <label asp-for="Contrasena" class="form-label">Contraseña</label>
                                     <div class="input-group">
@@ -34,6 +36,7 @@
                                     </div>
                                 </div>
 
+                                @*Campo de confirmación de contraseña nueva*@
                                 <div class="mb-3">
                                     <label asp-for="ConfirmarContrasena" class="form-label">Confirmar Contraseña</label>
                                     <div class="input-group">
@@ -48,7 +51,8 @@
                                 </div>
                             </form>
                         </div>
-                    </div>        
+                    </div> 
+                    @*Enlace para regresar a Login*@       
                     <div class="text-center">
                         <span class="text-white-50">¿Ya tienes cuenta?</span>
                         <a asp-controller="Account" asp-action="Login" class="text-decoration-none">

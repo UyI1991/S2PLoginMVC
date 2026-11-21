@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using LoginMVC.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
+// Constructor de la aplicacion Web
 var builder = WebApplication.CreateBuilder(args);
 
 // Configurar MVC
@@ -32,8 +33,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
     });
 
+// Control de acceso por roles
 builder.Services.AddAuthorization();
 
+// Constructor de la instancia Web
 var app = builder.Build();
 
 // Configurar el sistema
@@ -52,6 +55,7 @@ app.UseRouting();
 // Activar autenticacion
 app.UseAuthentication();
 
+// Evalua los permisos y roles
 app.UseAuthorization();
 
 // Ruta principal
@@ -60,4 +64,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
+// Inicio de servidor Web
 app.Run();

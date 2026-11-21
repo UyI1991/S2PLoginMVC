@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/LoginMVC.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @*Si se ha iniciado sesión se muestra la barra superior*@
     @if (User.Identity != null && User.Identity.IsAuthenticated)
     {
         var idUsuario = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -28,6 +29,7 @@
                         </li>
                     </ul>
 
+                    @*Se muestra el id de usuario y Gestion de usuarios si es Admin*@
                     <div class="d-flex align-items-center gap-3 ms-auto">
                         <span class="badge bg-info bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-3 py-2">
                             ID: #@idUsuario
@@ -46,6 +48,8 @@
         </nav>
     </header>
     }
+
+    @*Contenedor dinamico de cada visita*@
     <div class="container-fluid px-0">
         <main role="main">
             @RenderBody()
@@ -59,6 +63,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
+    @*Script para mostrar u ocultar las contraseñas*@
     <script>
         <!-- Script de Alternancia de Contraseña Visible -->
         function togglePass(btn) {

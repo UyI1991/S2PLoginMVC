@@ -26,11 +26,11 @@
     </div>
 
     <div class="card-body text-center">
-
+        @*Saludo del nombre del usuario*@
         @if (User.Identity != null && User.Identity.IsAuthenticated)
         {
             <h2 class="text-success">
-                ¡Bienvenido de nuevo, @User.Identity.Name!
+                ¡Bienvenido de nuevo, <span class="fw-semibold">@User.Identity.Name</span>!
             </h2>
         }
         <p>
@@ -38,6 +38,7 @@
         </p>
 
     </div>
+    @*Botones de Cambio de contraseña y Cerrar Sesión*@
     <div class="d-flex justify-content-center align-items-center gap-3 mt-4" style="max-width: 600px;">
         <a asp-controller="Account" asp-action="ChangePassword" 
             class="btn btn-warning text-white justify-content-center align-items-center gap-2 px-4 py-2 rounded-pill">
@@ -53,7 +54,7 @@
             </button>
         </form>
     </div>
-
+    @*Pie de página*@
     <div class="card-footer border-0 bg-transparent text-center text-muted py-2">
         <small>Universidad Panamericana</small>
     </div>
