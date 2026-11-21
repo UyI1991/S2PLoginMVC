@@ -251,3 +251,4 @@ C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\ProyectoFinal\LoginMVC\obj\Debug\net8
 C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\ProyectoFinal\LoginMVC\obj\Debug\net8.0\LoginMVC.pdb
 C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\ProyectoFinal\LoginMVC\obj\Debug\net8.0\LoginMVC.genruntimeconfig.cache
 C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\ProyectoFinal\LoginMVC\obj\Debug\net8.0\ref\LoginMVC.dll
+C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\ProyectoFinal\LoginMVC\obj\Debug\net8.0\LoginMVC.sourcelink.json

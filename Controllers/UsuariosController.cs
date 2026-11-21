@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LoginMVC.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -69,7 +67,7 @@ namespace LoginMVC.Controllers
                     usuario.IdUsuario.ToString()),
             };
 
-            // Si el usuario es "admin" (sin importar mayúsculas/minúsculas), asignarle el rol Admin
+            // Si el usuario es "admin" se asigna el rol Admin
             if (usuario.Nickname.Equals("admin", StringComparison.OrdinalIgnoreCase))
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Admin"));
@@ -80,7 +78,7 @@ namespace LoginMVC.Controllers
 
             var principal = new ClaimsPrincipal(identidad);
 
-            // Crear sesion autenticada
+            // Crear sesión autenticada
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
@@ -116,7 +114,7 @@ namespace LoginMVC.Controllers
                 return View(modelo);
             }
 
-            // Validar que el Nickname no exista en SQL Server
+            // Validar que el usuario no exista en SQL Server
             bool existe = await _context.Usuarios.AnyAsync(u => u.Nickname == modelo.Nickname);
             if (existe)
             {
@@ -138,7 +136,7 @@ namespace LoginMVC.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        // 2. CAMBIO DE CONTRASEÑA (Solo Autenticados)
+        // Cambio de contraseña
         [HttpGet]
         [Authorize]
         public IActionResult ChangePassword()
@@ -185,7 +183,7 @@ namespace LoginMVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GESTIÓN DE USUARIOS (Solo Super Admin)
+        // Gestión de usuarios desde Admin
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ManageUsers()
