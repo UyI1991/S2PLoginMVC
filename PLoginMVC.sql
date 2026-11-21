@@ -17,7 +17,7 @@ GO
 -- 4. Insertar datos de prueba
 INSERT INTO Usuarios (Nickname, Contrasena)
 VALUES 
-    ('alorenzo', 12345678),
+    ('alorenzo', $2a$11$180UvxQVRq7H5ldWfeBrZe.abrHbh14ueXUDKZzOkgPSzfyGUnaTK),
 GO
 
 --5. Comprobar los datos
