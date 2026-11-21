@@ -1,0 +1,163 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #0f0c1b 0%, #3a1c1c 25%, #4a2711 50%, #1e2a4a 75%, #0f0c1b 100%);
+  background-attachment: fixed;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* Contenedor del fondo con degradado de colores abstractos */
+.glass-page-bg {
+    background: linear-gradient(135deg, #0f0c1b 0%, #3a1c1c 25%, #4a2711 50%, #1e2a4a 75%, #0f0c1b 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* La tarjeta esmerilada */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05); /* Muy translúcido */
+    backdrop-filter: blur(25px); /* Desenfoque de fondo */
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Borde suave */
+    border-radius: 2rem; /* Esquinas muy redondeadas */
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+/* Campos de entrada estilo glass */
+.glass-input-group .form-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.glass-input-group .form-control {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.8rem;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.glass-input-group .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.glass-input-group .form-control:focus {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* Grupo de contraseña con el icono de ojo */
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.2s ease;
+}
+
+.password-toggle-icon:hover {
+    color: #ffffff;
+}
+
+/* Botón de acceso principal (blanco y sólido) */
+.btn-glass-submit {
+    background: #ffffff;
+    color: #0b0e14; /* Color oscuro */
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.85rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-glass-submit:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+    color: #0b0e14;
+}
+
+/* Botones de redes o alternativos inferiores */
+.btn-social-outline {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.8rem;
+    color: #ffffff;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+
+.btn-social-outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+}
+
+/* Línea "or continue with" */
+.divider-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.divider-text:not(:empty)::before {
+    margin-right: .75em;
+}
+
+.divider-text:not(:empty)::after {
+    margin-left: .75em;
+}

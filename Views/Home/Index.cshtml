@@ -1,0 +1,62 @@
+﻿@if (TempData["MensajeCambio"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["MensajeCambio"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@using System.Security.Claims
+@{
+    ViewData["Title"] = "Panel Principal";
+    var nombreUsuario = User.Identity?.Name ?? "Usuario";
+    var idUsuario = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    bool esAdmin = User.IsInRole("Admin");
+}
+
+<div class="glass-page-bg min-vh-100 w-100">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-7 px-3">
+    <div class="container" style="max-width: 600px;">
+        <div class="card shadow-lg border-0 rounded-3 overflow-hidden">
+
+    <div class=""d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-white border-opacity-10"">
+        <div class="card-header bg-success text-white align-center" style="max-width: 600px;">
+            <h3>Panel Principal</h3>
+        </div>    
+    </div>
+
+    <div class="card-body text-center">
+
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <h2 class="text-success">
+                ¡Bienvenido de nuevo, @User.Identity.Name!
+            </h2>
+        }
+        <p>
+            En este panel puedes administrar tu sesión de usuario.
+        </p>
+
+    </div>
+    <div class="d-flex justify-content-center align-items-center gap-3 mt-4" style="max-width: 600px;">
+        <a asp-controller="Account" asp-action="ChangePassword" 
+            class="btn btn-warning text-white justify-content-center align-items-center gap-2 px-4 py-2 rounded-pill">
+            <i class="bi bi-key-fill text-warning"></i>
+            <span>Cambiar Contraseña</span>
+        </a>
+
+        <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger text-white justify-content-center align-items-center gap-2 px-4 py-2 rounded-pill">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Cerrar Sesión</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="card-footer border-0 bg-transparent text-center text-muted py-2">
+        <small>Universidad Panamericana</small>
+    </div>
+</div>
+
+

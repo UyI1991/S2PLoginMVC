@@ -1,0 +1,80 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UPANA</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LoginMVC.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        var idUsuario = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark shadow-sm" style="background-color: #1a0d3f; border-bottom: 1px solid #1a0d3f;">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LoginMVC</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-3 ms-auto">
+                        <span class="badge bg-info bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-3 py-2">
+                            ID: #@idUsuario
+                        </span>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Account" asp-action="ManageUsers"
+                                class="btn btn-sm btn-outline-info rounded-pill px-3">
+                                <i class="bi bi-people-fill me-1"></i> Administrar Usuarios
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    }
+    <div class="container-fluid px-0">
+        <main role="main">
+            @RenderBody()
+        </main>
+
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function togglePass(btn) {
+            const input = btn.parentElement.querySelector("input");
+            const icon = btn.querySelector("i");
+            if (!input) return;
+
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+            }
+        }
+    </script>
+</body>
+</html>
